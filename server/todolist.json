@@ -1,0 +1,29 @@
+{
+    "todolist": [
+      {
+        "title": "Complete Project Proposal",
+        "description": "Draft and finalize the project proposal document.",
+        "date": "2025-02-22"
+      },
+      {
+        "title": "Team Meeting",
+        "description": "Discuss progress and assign tasks for the upcoming sprint.",
+        "date": "2025-02-23"
+      },
+      {
+        "title": "Buy groceries",
+        "description": "Get fruits, vegetables, and snacks for the week",
+        "date": "2025-02-22"
+      },
+      {
+        "title": "Finish reading book",
+        "description": "Complete chapters 5-8 of the novel",
+        "date": "2025-02-23"
+      },
+      {
+        "title": "Prepare presentation",
+        "description": "Create slides for work presentation",
+        "date": "2025-02-24"
+      }
+    ]
+  }
