@@ -1,24 +1,77 @@
-/* eslint-disable no-unused-vars */
-import React from 'react';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
+import React, { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-function Todo() {
+const Todo = () => {
+  const [todo, setTodo] = useState([]);
+
+  const { id } = useParams();
+
+  const navigate = useNavigate();
+
+  const handleDelete = async () => {
+    try {
+      const response = await axios.delete(
+        `http://localhost:3000/todolist/${id}`
+      );
+
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    const fetchTodo = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:3000/todolist/${id}`
+        );
+        setTodo(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchTodo();
+  }, []);
+
+  console.log(todo);
+
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <Card className="w-96 shadow-lg">
-        <CardHeader>
-          <CardTitle>Card Title</CardTitle>
-          <CardDescription>Card Description</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <p>Card Content</p>
-        </CardContent>
-        <CardFooter>
-          <p>Card Footer</p>
-        </CardFooter>
-      </Card>
+    <div>
+      <div>
+        <Card className="w-[750px]">
+          <CardHeader>
+            <CardTitle className="flex justify-between">
+              <h1>{todo.title}</h1>{" "}
+              <Button onClick={handleDelete} variant="destructive" className>
+                Delete To Do
+              </Button>
+            </CardTitle>
+            <CardDescription>{todo.date}</CardDescription>
+          </CardHeader>
+          <CardContent className="flex flex-col items-center py-10">
+            <p>{todo.description}</p>
+          </CardContent>
+
+          <CardFooter className="flex justify-between">
+            <h1>Made with ♥ by Mario Inguito</h1>
+          </CardFooter>
+        </Card>
+      </div>
     </div>
   );
-}
+};
 
 export default Todo;
